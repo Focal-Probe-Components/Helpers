@@ -58,6 +58,8 @@ function config(string $key, string $config = "app"): string|null{
     return $config[$key] ?? NULL;
 }
 
+
+#[FocalOnly]
 /**
  * Helper function to include a view file
  * @param string $view `partials.auth.index` = `views/partials/auth/index`
