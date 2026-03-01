@@ -3,6 +3,17 @@ use Probe\Attributes\FocalOnly;
 use Probe\Attributes\Anywhere;
 
 
+// PHP 8.5 ARRAY FUNCTIONS FOR PHP VERSIONS LOWER THAN 8.5
+if (version_compare(PHP_VERSION, "8.5.0", "<")){
+
+    function array_first(array $array):mixed{
+        return array_values($array)[0];
+    }
+    function array_last(array $array):mixed{
+        return array_values($array)[count($array) -  1];
+    }
+}
+
 
 if (class_exists(Focal\Core\Kernel::class)){
     #[FocalOnly]
@@ -14,6 +25,17 @@ if (class_exists(Focal\Core\Kernel::class)){
      */
     function app(): Focal\Core\Kernel{
         return Focal\Core\Kernel::getInstance();
+    }
+
+    /**
+     * @param string $name
+     * @return string|false Returns the file path of a stub or false if it does not exist.
+     */
+    function stub(string $name){
+        return match(true){
+            app()->doesStubExist($name) => app()->getStubPath($name),
+            default => false,
+        };
     }
 }
 
@@ -37,6 +59,8 @@ function env(string $key): int|bool|string{
     }
     return $_ENV[$key];
 }
+
+
 
 /**
  * Returns the currently set value from config/app.php
