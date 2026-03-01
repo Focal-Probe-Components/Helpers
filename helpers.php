@@ -78,7 +78,7 @@ function config(string $key, string $config = "app"): string|null{
     if (!file_exists(app()->basePath() . "/config/{$config}.php")){
         throw new Exception("Config file config/{$config}.php does not exist.");
     }
-    $config = require_once "../config/{$config}.php";
+    $config = require_once app()->basePath() . "/config/{$config}.php";
     return $config[$key] ?? NULL;
 }
 
