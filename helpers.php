@@ -63,7 +63,7 @@ function env(string $key): int|bool|string{
 
 
 /**
- * Returns the currently set value from config/app.php
+ * Returns the currently set value from config/app.php or any other config file in App/config/
  * * Can be run: `Only in a Focal App`
  * @param string $key
  * @param string $config The name of the config you want to fetch from, i.e `app` => `config/app.php`
